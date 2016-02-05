@@ -1,8 +1,13 @@
 package CityPlanner;
 
-public class Main {
+import CityPlanner.Model.*;
 
+/**
+ * Created by tito on 5/02/16.
+ */
+public class Main {
     public static void main(String[] args) {
-        System.out.println("Coucou!");
+        City paris = new City("Paris");
+        System.out.println(paris.getName());
     }
 }
