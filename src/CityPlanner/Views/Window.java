@@ -1,8 +1,7 @@
-package CityPlanner;
+package CityPlanner.Views;
 
 import javax.swing.*;
 import java.awt.*;
-
 
 import java.awt.Color;
 import javax.swing.*;
