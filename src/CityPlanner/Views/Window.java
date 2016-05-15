@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import CityPlanner.Model.*;
+import CityPlanner.Model.City;
+import CityPlanner.Model.Database;
+import CityPlanner.Model.Tag;
+import CityPlanner.Model.Trip;
 import com.sun.org.apache.regexp.internal.RE;
 import com.toedter.calendar.*;
 
@@ -166,22 +169,27 @@ public class Window extends JFrame {
         public void actionPerformed(ActionEvent e) {
             try {
                 trip = new Trip((City)cityComboBox.getSelectedItem(), Integer.parseInt((String)personComboBox.getSelectedItem()), (Tag)tagComboBox.getSelectedItem());
-                String[] columnNames = {"Activité",
-                        "Description",
-                        "Adresse",
-                        "Durée",
-                        "Prix",
-                        "Ouverture"};
+                //responseTextField.setText(trip.toString());
+                String[] columnNames = {"First Name",
+                        "Last Name",
+                        "Sport",
+                        "# of Years",
+                        "Vegetarian"};
 
-                ArrayList<Object> data = new ArrayList<Object>();
-                for(Activity a: trip.getActivities()) {
-                    data.add(new Object[]{
-                            a.getName(), a.getDescription(), a.getAddress(), a.getDuration(), a.getPrice(), a.getOpen()
-                    });
-                }
-                Object[] data2 = data.toArray();
+                Object[][] data = {
+                        {"Mary", "Campione",
+                                "Snowboarding", new Integer(5), new Boolean(false)},
+                        {"Alison", "Huml",
+                                "Rowing", new Integer(3), new Boolean(true)},
+                        {"Kathy", "Walrath",
+                                "Knitting", new Integer(2), new Boolean(false)},
+                        {"Sharon", "Zakhour",
+                                "Speed reading", new Integer(20), new Boolean(true)},
+                        {"Philip", "Milne",
+                                "Pool", new Integer(10), new Boolean(false)}
+                };
 
-                JTable table = new JTable(data2, columnNames);
+                JTable table = new JTable(data, columnNames);
 
                 System.out.println("Try...");
 
