@@ -56,7 +56,6 @@ public class Window extends JFrame {
         pan.add(CityLabel, gbc);
 
         //Positionnement du sélecteur de choix de la ville
-        String[] cityItems = {"Bruxelles", "Paris"};
         ArrayList<City> cities = Database.getAllCities();
         JComboBox CityComboBox = new JComboBox(cities.toArray());
         gbc.gridx = 1;
@@ -115,8 +114,8 @@ public class Window extends JFrame {
         pan.add(TagLabel, gbc);
 
 
-        String[] Tag = {"Familial", "Couple", "Adulte", "Divertissement", "Sport"};
-        JComboBox TagComboBox = new JComboBox(Tag);
+        ArrayList<Tag> tags = Database.getAllTags();
+        JComboBox TagComboBox = new JComboBox(tags.toArray());
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
