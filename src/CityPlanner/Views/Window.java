@@ -165,6 +165,7 @@ public class Window extends JFrame {
             this.tagComboBox = tagComboBox;
             this.responsePanel = responsePanel;
         }
+
         public void actionPerformed(ActionEvent e) {
             try {
                 trip = new Trip((City)cityComboBox.getSelectedItem(), Integer.parseInt((String)personComboBox.getSelectedItem()), (Tag)tagComboBox.getSelectedItem());
