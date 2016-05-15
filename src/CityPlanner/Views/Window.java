@@ -122,6 +122,13 @@ public class Window extends JFrame {
         pan.add(TagComboBox, gbc);
 
         JTextField Response = new JTextField("Votre programme de city trip ici...");
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 8;
+        Font police = new Font("Arial", Font.ITALIC, 10);
+        Response.setFont(police);
+        Response.setPreferredSize(new Dimension(150, 180));
+        pan.add(Response, gbc);
 
         JButton Search = new JButton("Rechercher");
         Search.addActionListener(new SearchActionListener(CityComboBox, PersonComboBox, TagComboBox, Response));
@@ -130,13 +137,6 @@ public class Window extends JFrame {
         gbc.gridwidth = 8;
         pan.add(Search, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.gridwidth = 8;
-        Font police = new Font("Arial", Font.ITALIC, 10);
-        Response.setFont(police);
-        Response.setPreferredSize(new Dimension(150, 180));
-        pan.add(Response, gbc);
 
         JButton Print = new JButton("Imprimer");
         gbc.gridx = 1;
