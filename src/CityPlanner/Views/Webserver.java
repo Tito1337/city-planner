@@ -6,11 +6,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Created by tito on 15/05/16.
+ * La classe Webserver implémente un petit serveur web multithreadé
+ * Implémenté en Runnable, donc doit être lancé par un thread
  */
 public class Webserver implements Runnable {
     int port;
 
+    /**
+     * Constructeur
+     * @param port
+     */
     public Webserver(int port) {
         this.port = port;
     }
@@ -38,16 +43,18 @@ public class Webserver implements Runnable {
             try {
                 InputStream input  = socket.getInputStream();
                 OutputStream output = socket.getOutputStream();
-                long time = System.currentTimeMillis();
-                output.write(("HTTP/1.1 200 OK\n\nWorkerRunnable: " +
-                        "Coucou" + " - " +
-                        time +
-                        "").getBytes());
+
+                String html = "<html><head></head><body>Mon super serveur web</body></html>";
+
+                output.write(("HTTP/1.0 200 OK\r\n"+
+                              "Connection: Close\r\n"+
+                              "\r\n"+
+                              html).getBytes());
+
                 output.close();
                 input.close();
-                System.out.println("Request processed: " + time);
             } catch (Exception e) {
-                //report exception somewhere.
+                System.err.printf("ERREUR serveur web : %s\n", e);
                 e.printStackTrace();
             }
         }

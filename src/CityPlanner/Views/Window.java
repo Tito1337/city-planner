@@ -16,6 +16,7 @@ import com.toedter.calendar.*;
 
 import java.awt.Color;
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 
 /**
  * Created by Benjamin on 11/03/16.
@@ -183,6 +184,15 @@ public class Window extends JFrame {
                 trip = new Trip((City)cityComboBox.getSelectedItem(), Integer.parseInt((String)personComboBox.getSelectedItem()), (Tag)tagComboBox.getSelectedItem());
                 //responseTextField.setText(trip.toString());
                 JTable table = new JTable(new ResultTableModel(trip.getActivities()));
+                TableColumn column = null;
+                for (int i = 0; i < 5; i++) {
+                    column = table.getColumnModel().getColumn(i);
+                    if (i == 2) {
+                        column.setPreferredWidth(100); //third column is bigger
+                    } else {
+                        column.setPreferredWidth(50);
+                    }
+                }
 
                 responsePanel.setLayout(new BorderLayout());
                 responsePanel.add(table.getTableHeader(), BorderLayout.PAGE_START);
