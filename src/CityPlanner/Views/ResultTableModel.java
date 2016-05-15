@@ -15,7 +15,7 @@ public class ResultTableModel extends AbstractTableModel {
             "Durée",
             "Prix",
             "Ouverture",
-            "Go"};
+            "Accepter"};
     private ArrayList<Activity> activities;
 
     public ResultTableModel(ArrayList<Activity> activities) {

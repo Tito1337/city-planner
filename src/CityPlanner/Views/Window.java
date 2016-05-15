@@ -28,7 +28,7 @@ public class Window extends JFrame {
         //Titre de la fenêtre
         this.setTitle("Plan your city trip");
         //Définit sa taille : 550 pixels de large et 420 pixels de haut
-        this.setSize(550, 420);
+        this.setSize(1024, 420);
         //Positionnement de la fenêtre au centre de l'écran
         this.setLocationRelativeTo(null);
         //Termine le processus lorsqu'on ferme la fenêtre
@@ -136,7 +136,7 @@ public class Window extends JFrame {
         gbc.gridwidth = 8;
         /*Font police = new Font("Arial", Font.ITALIC, 10);
         Response.setFont(police);*/
-        Response.setPreferredSize(new Dimension(150, 180));
+        Response.setPreferredSize(new Dimension(1000, 180));
         pan.add(Response, gbc);
 
         JButton Print = new JButton("Imprimer");
@@ -161,7 +161,7 @@ public class Window extends JFrame {
 
             }
         }
-    }
+
 
 
     private class SearchActionListener implements ActionListener {
@@ -184,15 +184,12 @@ public class Window extends JFrame {
                 trip = new Trip((City)cityComboBox.getSelectedItem(), Integer.parseInt((String)personComboBox.getSelectedItem()), (Tag)tagComboBox.getSelectedItem());
                 //responseTextField.setText(trip.toString());
                 JTable table = new JTable(new ResultTableModel(trip.getActivities()));
-                TableColumn column = null;
-                for (int i = 0; i < 5; i++) {
-                    column = table.getColumnModel().getColumn(i);
-                    if (i == 2) {
-                        column.setPreferredWidth(100); //third column is bigger
-                    } else {
-                        column.setPreferredWidth(50);
-                    }
-                }
+                table.getColumnModel().getColumn(0).setPreferredWidth(100);
+                table.getColumnModel().getColumn(1).setPreferredWidth(350);
+                table.getColumnModel().getColumn(2).setPreferredWidth(200);
+                table.getColumnModel().getColumn(3).setPreferredWidth(50);
+                table.getColumnModel().getColumn(4).setPreferredWidth(50);
+                table.getColumnModel().getColumn(5).setPreferredWidth(200);
 
                 responsePanel.setLayout(new BorderLayout());
                 responsePanel.add(table.getTableHeader(), BorderLayout.PAGE_START);
