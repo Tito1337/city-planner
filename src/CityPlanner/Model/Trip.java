@@ -34,7 +34,7 @@ public class Trip {
         return tag;
     }
 
-    public ArrayList<Activity> getTripActivities() {
+    public ArrayList<Activity> getActivities() {
         return activities;
     }
 }

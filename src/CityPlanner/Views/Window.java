@@ -175,16 +175,13 @@ public class Window extends JFrame {
 
                 ArrayList<Object> data = new ArrayList<Object>();
                 for(Activity a: trip.getActivities()) {
-                    data.add({
-                            a.getName(), a.getDescription()
-                    })
+                    data.add(new Object[]{
+                            a.getName(), a.getDescription(), a.getAddress(), a.getDuration(), a.getPrice(), a.getOpen()
+                    });
                 }
-                Object[][] data = {
-                        {"Mary", "Campione",
-                                "Snowboarding", "a", "b", "e", "e"}
-                };
+                Object[] data2 = data.toArray();
 
-                JTable table = new JTable(data, columnNames);
+                JTable table = new JTable(data2, columnNames);
 
                 System.out.println("Try...");
 
