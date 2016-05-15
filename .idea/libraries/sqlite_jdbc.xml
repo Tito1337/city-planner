@@ -2,10 +2,14 @@
   <library name="sqlite-jdbc">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/src/CityPlanner/Model/sqlite-jdbc.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jcalendar-1/lib/jcalendar-1.4.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="file://$USER_HOME$/Downloads/jcalendar-1/doc/api" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/src/CityPlanner/Model/sqlite-jdbc.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/jcalendar-1/src" />
     </SOURCES>
   </library>
 </component>
