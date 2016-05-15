@@ -9,7 +9,7 @@ import CityPlanner.Views.Window;
 public class Main {
     public static void main(String[] args) {
         try {
-            //Window Citytrip = new Window();
+            Window Citytrip = new Window();
             ArrayList<City> cities = Database.getAllCities();
             for(City city: cities) {
                 System.out.printf("### %s ###\n", city.getName());

@@ -2,8 +2,13 @@ package CityPlanner.Views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
+import CityPlanner.Model.City;
+import CityPlanner.Model.Database;
 import com.sun.org.apache.regexp.internal.RE;
 import com.toedter.calendar.*;
 
@@ -16,8 +21,7 @@ import javax.swing.*;
 
 public class Window extends JFrame {
 
-    public Window() {
-
+    public Window() throws SQLException {
         //Titre de la fenêtre
         this.setTitle("Plan your city trip");
         //Définit sa taille : 550 pixels de large et 420 pixels de haut
@@ -51,7 +55,8 @@ public class Window extends JFrame {
 
         //Positionnement du sélecteur de choix de la ville
         String[] cityItems = {"Bruxelles", "Paris"};
-        JComboBox CityComboBox = new JComboBox(cityItems);
+        ArrayList<City> cities = Database.getAllCities();
+        JComboBox CityComboBox = new JComboBox(cities.toArray());
         gbc.gridx = 1;
         gbc.gridy = 0 ;
         gbc.gridwidth = 1 ;
@@ -116,6 +121,7 @@ public class Window extends JFrame {
         pan.add(TypeComboBox, gbc);
 
         JButton Search = new JButton("Rechercher");
+        Search.addActionListener(new SearchActionListener());
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 8;
@@ -159,9 +165,12 @@ public class Window extends JFrame {
         this.add(pan, BorderLayout.NORTH);
 
         this.setVisible(true); // Rendre la fenêtre visible
+    }
 
-
-
+    private class SearchActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("TROP COOL MON GARS");
+        }
     }
 
 
