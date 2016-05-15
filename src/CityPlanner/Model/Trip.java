@@ -9,9 +9,9 @@ import java.util.ArrayList;
  * Created by tito on 5/02/16.
  */
 public class Trip {
-    private City city;
+    private City city = null;
     private int personNumber;
-    private Tag tag;
+    private Tag tag = null;
     private ArrayList<Activity> activities;
 
     public Trip() {
@@ -23,7 +23,7 @@ public class Trip {
         this.personNumber = personNumber;
         this.tag = tag;
 
-        this.activities = Database.getCityActivities(city);
+        this.activities = Database.getCityActivitiesByTag(city, tag);
     }
 
     public City getCity() {
@@ -44,15 +44,20 @@ public class Trip {
 
     public void setCity(City city) throws SQLException {
         this.city = city;
-        this.activities = Database.getCityActivities(city);
+        if(tag != null) {
+            this.activities = Database.getCityActivitiesByTag(city, tag);
+        }
     }
 
     public void setPersonNumber(int personNumber) {
         this.personNumber = personNumber;
     }
 
-    public void setTag(Tag tag) {
+    public void setTag(Tag tag) throws SQLException {
         this.tag = tag;
+        if(city != null) {
+            this.activities = Database.getCityActivitiesByTag(city, tag);
+        }
     }
 
     public void setActivities(ArrayList<Activity> activities) {

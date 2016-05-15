@@ -98,6 +98,27 @@ public class Database {
         return res;
     }
 
+    /**
+     * Récupérer les activités d'une certaine ville, filtré par tag
+     * @param city ville où se déroulent les activités
+     * @param tag tag dont doivent faire partie les activités
+     * @return liste des activités de la ville city
+     * @throws SQLException
+     */
+    public static ArrayList<Activity> getCityActivitiesByTag(City city, Tag tag) throws SQLException {
+        ArrayList<Activity> res = new ArrayList<Activity>();
+
+        Statement stmt = getConnection().createStatement();
+        ResultSet query = stmt.executeQuery("SELECT * FROM activity, activity_to_tag WHERE activity_to_tag.activity=activity.id AND city='"+city.getId()+"' AND tag='"+tag.getId()+"'");
+        while(query.next()) {
+            res.add(new Activity(query.getInt("id"), city, query.getString("name"), query.getString("description"),
+                    query.getFloat("price"), query.getFloat("duration"), query.getString("address"),
+                    query.getString("open"), getActivityTags(query.getInt("id"))));
+        }
+
+        return res;
+    }
+
 
     /**
      * Récupérer un tag dans la base de données

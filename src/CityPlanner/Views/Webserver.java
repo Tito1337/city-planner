@@ -1,5 +1,7 @@
 package CityPlanner.Views;
 
+import CityPlanner.Model.Trip;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
@@ -11,13 +13,15 @@ import java.net.Socket;
  */
 public class Webserver implements Runnable {
     int port;
+    Trip trip;
 
     /**
      * Constructeur
      * @param port
      */
-    public Webserver(int port) {
+    public Webserver(int port, Trip trip) {
         this.port = port;
+        this.trip = trip;
     }
 
     public void run() {
@@ -44,7 +48,19 @@ public class Webserver implements Runnable {
                 InputStream input  = socket.getInputStream();
                 OutputStream output = socket.getOutputStream();
 
-                String html = "<html><head></head><body>Mon super serveur web</body></html>";
+                String html = "<!DOCTYPE html>\r\n"+
+                        "<html>\r\n"+
+                        "<head>\r\n"+
+                        "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\r\n"+
+                        "   <title>Votre City Trip</title>\r\n"+
+                        "</head>\r\n"+
+                        "<body>\r\n";
+
+                if(trip.getCity() != null && trip.getTag() != null) {
+                    html += "<h1>Séjour à "+trip.getCity()+"</h1>";
+                }
+
+                html += "</body>\r\n</html>";
 
                 output.write(("HTTP/1.0 200 OK\r\n"+
                               "Connection: Close\r\n"+

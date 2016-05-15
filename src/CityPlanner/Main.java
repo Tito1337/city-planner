@@ -9,8 +9,9 @@ import CityPlanner.Views.*;
 public class Main {
     public static void main(String[] args) {
         try {
-            Window Citytrip = new Window();
-            new Thread(new Webserver(9888)).start();
+            Trip trip = new Trip();
+            Window Citytrip = new Window(trip);
+            new Thread(new Webserver(9888, trip )).start();
         } catch (Exception e) {
             System.err.printf("ERREUR JAVA : %s\n", e);
             e.printStackTrace();

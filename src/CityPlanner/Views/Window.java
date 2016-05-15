@@ -22,8 +22,11 @@ import javax.swing.table.TableColumn;
  * Created by Benjamin on 11/03/16.
  */
 public class Window extends JFrame {
+    Trip trip;
 
-    public Window() throws SQLException {
+    public Window(Trip trip) throws SQLException {
+        this.trip = trip;
+
         //Titre de la fenêtre
         this.setTitle("Plan your city trip");
         //Définit sa taille : 550 pixels de large et 420 pixels de haut
@@ -124,7 +127,6 @@ public class Window extends JFrame {
         JPanel ResponsePanel = new JPanel();
 
         JButton Search = new JButton("Rechercher");
-        Trip trip = new Trip();
         Search.addActionListener(new SearchActionListener(CityComboBox, PersonComboBox, TagComboBox, ResponsePanel, trip));
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -197,10 +199,10 @@ public class Window extends JFrame {
     }
 
     private class PrintActionListener implements ActionListener {
-        JPanel responsePanel;
+        Trip trip;
 
-        public PrintActionListener(JPanel responsePanel) {
-            this.responsePanel = responsePanel;
+        public PrintActionListener(Trip trip) {
+            this.trip = trip;
         }
 
         public void actionPerformed(ActionEvent e) {
