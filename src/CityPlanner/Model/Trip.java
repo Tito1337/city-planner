@@ -1,16 +1,18 @@
 package CityPlanner.Model;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
  * Created by tito on 5/02/16.
  */
 public class Trip {
-    City city;
-    int personNumber;
-    Tag tag;
-    ArrayList<Activity> activities;
+    private City city;
+    private int personNumber;
+    private Tag tag;
+    private ArrayList<Activity> activities;
 
     public Trip(City city, int personNumber, Tag tag) throws SQLException {
         this.city = city;
@@ -20,8 +22,19 @@ public class Trip {
         this.activities = Database.getCityActivities(city);
     }
 
-    public String toString() {
-        String out = "Voyage à "+this.city+"\n";
-        return out;
+    public City getCity() {
+        return city;
+    }
+
+    public int getPersonNumber() {
+        return personNumber;
+    }
+
+    public Tag getTag() {
+        return tag;
+    }
+
+    public ArrayList<Activity> getTripActivities() {
+        return activities;
     }
 }

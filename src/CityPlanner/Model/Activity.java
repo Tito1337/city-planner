@@ -41,6 +41,11 @@ public class Activity {
     }
 
     /**
+     * Constructeur par défaut pour héritage
+     */
+    public Activity() {}
+
+    /**
      * @return identifiant unique de l'activité dans la base de données
      */
     public int getId() {
@@ -73,5 +78,21 @@ public class Activity {
      */
     public ArrayList<Tag> getTags() {
         return tags;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public float getDuration() {
+        return duration;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getOpen() {
+        return open;
     }
 }
