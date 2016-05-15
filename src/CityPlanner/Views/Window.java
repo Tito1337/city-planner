@@ -139,17 +139,29 @@ public class Window extends JFrame {
         pan.add(Response, gbc);
 
         JButton Print = new JButton("Imprimer");
+        Print.addActionListener(new PrintActionListener());
         gbc.gridx = 1;
         gbc.gridy = 5;
         gbc.gridwidth = 5;
         gbc.insets = new Insets(10,1,1,1);
         pan.add(Print, gbc);
 
+
+
         //On prévient notre JFrame que notre JPanel sera son content pane
         this.add(pan, BorderLayout.NORTH);
 
         this.setVisible(true); // Rendre la fenêtre visible
     }
+
+    private class PrintActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+                //System.out.println("Yep");
+
+            }
+        }
+    }
+
 
     private class SearchActionListener implements ActionListener {
         JComboBox cityComboBox;
@@ -188,6 +200,8 @@ public class Window extends JFrame {
                         {"Philip", "Milne",
                                 "Pool", new Integer(10), new Boolean(false)}
                 };
+
+
 
                 JTable table = new JTable(data, columnNames);
 
