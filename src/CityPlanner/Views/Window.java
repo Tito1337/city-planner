@@ -121,14 +121,7 @@ public class Window extends JFrame {
         gbc.gridwidth = 1;
         pan.add(TagComboBox, gbc);
 
-        JTextField Response = new JTextField("Votre programme de city trip ici...");
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.gridwidth = 8;
-        Font police = new Font("Arial", Font.ITALIC, 10);
-        Response.setFont(police);
-        Response.setPreferredSize(new Dimension(150, 180));
-        pan.add(Response, gbc);
+        JPanel Response = new JPanel();
 
         JButton Search = new JButton("Rechercher");
         Search.addActionListener(new SearchActionListener(CityComboBox, PersonComboBox, TagComboBox, Response));
@@ -137,6 +130,13 @@ public class Window extends JFrame {
         gbc.gridwidth = 8;
         pan.add(Search, gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 8;
+        /*Font police = new Font("Arial", Font.ITALIC, 10);
+        Response.setFont(police);*/
+        Response.setPreferredSize(new Dimension(150, 180));
+        pan.add(Response, gbc);
 
         JButton Print = new JButton("Imprimer");
         gbc.gridx = 1;
@@ -155,27 +155,53 @@ public class Window extends JFrame {
         JComboBox cityComboBox;
         JComboBox personComboBox;
         JComboBox tagComboBox;
-        JTextField responseTextField;
+        JPanel responsePanel;
 
         Trip trip;
 
-        public SearchActionListener(JComboBox cityComboBox, JComboBox personComboBox, JComboBox tagComboBox, JTextField responseTextField) {
+        public SearchActionListener(JComboBox cityComboBox, JComboBox personComboBox, JComboBox tagComboBox, JPanel responsePanel) {
             this.cityComboBox = cityComboBox;
             this.personComboBox = personComboBox;
             this.tagComboBox = tagComboBox;
-            this.responseTextField = responseTextField;
+            this.responsePanel = responsePanel;
         }
         public void actionPerformed(ActionEvent e) {
             try {
                 trip = new Trip((City)cityComboBox.getSelectedItem(), Integer.parseInt((String)personComboBox.getSelectedItem()), (Tag)tagComboBox.getSelectedItem());
-                responseTextField.setText(trip.toString());
+                //responseTextField.setText(trip.toString());
+                String[] columnNames = {"First Name",
+                        "Last Name",
+                        "Sport",
+                        "# of Years",
+                        "Vegetarian"};
+
+                Object[][] data = {
+                        {"Mary", "Campione",
+                                "Snowboarding", new Integer(5), new Boolean(false)},
+                        {"Alison", "Huml",
+                                "Rowing", new Integer(3), new Boolean(true)},
+                        {"Kathy", "Walrath",
+                                "Knitting", new Integer(2), new Boolean(false)},
+                        {"Sharon", "Zakhour",
+                                "Speed reading", new Integer(20), new Boolean(true)},
+                        {"Philip", "Milne",
+                                "Pool", new Integer(10), new Boolean(false)}
+                };
+
+                JTable table = new JTable(data, columnNames);
+
+                System.out.println("Try...");
+
+                responsePanel.setLayout(new BorderLayout());
+                responsePanel.add(table.getTableHeader(), BorderLayout.PAGE_START);
+                responsePanel.add(table, BorderLayout.CENTER);
+                responsePanel.revalidate();
+                responsePanel.repaint();
             } catch(SQLException exception) {
-                responseTextField.setText("ERREUR SQL");
+                //responseTextField.setText("ERREUR SQL");
             }
 
         }
     }
-
-
 }
 

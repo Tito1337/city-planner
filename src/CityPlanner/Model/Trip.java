@@ -21,6 +21,7 @@ public class Trip {
     }
 
     public String toString() {
-        return "YO YO YOOOOOOOOOO";
+        String out = "Voyage à "+this.city+"\n";
+        return out;
     }
 }
