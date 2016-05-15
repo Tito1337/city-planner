@@ -182,30 +182,7 @@ public class Window extends JFrame {
             try {
                 trip = new Trip((City)cityComboBox.getSelectedItem(), Integer.parseInt((String)personComboBox.getSelectedItem()), (Tag)tagComboBox.getSelectedItem());
                 //responseTextField.setText(trip.toString());
-                String[] columnNames = {"First Name",
-                        "Last Name",
-                        "Sport",
-                        "# of Years",
-                        "Vegetarian"};
-
-                Object[][] data = {
-                        {"Mary", "Campione",
-                                "Snowboarding", new Integer(5), new Boolean(false)},
-                        {"Alison", "Huml",
-                                "Rowing", new Integer(3), new Boolean(true)},
-                        {"Kathy", "Walrath",
-                                "Knitting", new Integer(2), new Boolean(false)},
-                        {"Sharon", "Zakhour",
-                                "Speed reading", new Integer(20), new Boolean(true)},
-                        {"Philip", "Milne",
-                                "Pool", new Integer(10), new Boolean(false)}
-                };
-
-
-
-                JTable table = new JTable(data, columnNames);
-
-                System.out.println("Try...");
+                JTable table = new JTable(new ResultTableModel(trip.getActivities()));
 
                 responsePanel.setLayout(new BorderLayout());
                 responsePanel.add(table.getTableHeader(), BorderLayout.PAGE_START);
