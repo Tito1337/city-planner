@@ -1,5 +1,7 @@
 package CityPlanner.Views;
 
+import CityPlanner.Model.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,10 +9,6 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import CityPlanner.Model.City;
-import CityPlanner.Model.Database;
-import CityPlanner.Model.Tag;
-import CityPlanner.Model.Trip;
 import com.toedter.calendar.*;
 
 /**
@@ -149,6 +147,9 @@ public class Window extends JFrame {
         this.setVisible(true); // Rendre la fenêtre visible
     }
 
+    /**
+     * Listener pour réagir au clic du bouton "Rechercher"
+     */
     private class SearchActionListener implements ActionListener {
         JComboBox cityComboBox;
         JComboBox personComboBox;
@@ -158,6 +159,16 @@ public class Window extends JFrame {
         JDateChooser endDateChooser;
         Trip trip;
 
+        /**
+         * Constructeur
+         * @param cityComboBox sélecteur de ville
+         * @param personComboBox sélecteur de nombre de personnes
+         * @param tagComboBox sélecteur de tags
+         * @param responsePanel zone où afficher le résultat de la recherche
+         * @param trip instance de trip qui sera manipulée pour calculer le résultat
+         * @param startDateChooser sélecteur de date de début de séjour
+         * @param endDateChooser sélecteur de date de fin de séjour
+         */
         public SearchActionListener(JComboBox cityComboBox, JComboBox personComboBox, JComboBox tagComboBox, JPanel responsePanel, Trip trip, JDateChooser startDateChooser, JDateChooser endDateChooser) {
             this.cityComboBox = cityComboBox;
             this.personComboBox = personComboBox;
@@ -168,8 +179,12 @@ public class Window extends JFrame {
             this.trip = trip;
         }
 
+        /**
+         * Méthode appelée au clic du bouton "Rechercher"
+         */
         public void actionPerformed(ActionEvent e) {
             try {
+                // Nettoyage des vieilles recherches
                 responsePanel.removeAll();
 
                 // Mettre à jour l'instance de Trip avec les informations du formulaire
@@ -191,27 +206,16 @@ public class Window extends JFrame {
                 table.getColumnModel().getColumn(5).setPreferredWidth(100);
                 table.getColumnModel().getColumn(6).setPreferredWidth(100);
 
+                // Afficher le résultat
                 responsePanel.setLayout(new BorderLayout());
                 responsePanel.add(table.getTableHeader(), BorderLayout.PAGE_START);
                 responsePanel.add(table, BorderLayout.CENTER);
                 responsePanel.revalidate();
                 responsePanel.repaint();
             } catch(SQLException exception) {
-                //responseTextField.setText("ERREUR SQL");
+                System.err.printf("ERREUR SQL : %s\n", exception);
+                exception.printStackTrace();
             }
-
-        }
-    }
-
-    private class PrintActionListener implements ActionListener {
-        Trip trip;
-
-        public PrintActionListener(Trip trip) {
-            this.trip = trip;
-        }
-
-        public void actionPerformed(ActionEvent e) {
-
         }
     }
 }

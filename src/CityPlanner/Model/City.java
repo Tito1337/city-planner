@@ -31,6 +31,10 @@ public class City {
         return this.name;
     }
 
+    /**
+     * toString explicite pour faciliter l'écriture du sélecteur
+     * @return nom de la ville
+     */
     public String toString() {
         return getName();
     }

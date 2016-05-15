@@ -1,7 +1,6 @@
 package CityPlanner.Views;
 
-import CityPlanner.Model.Activity;
-import CityPlanner.Model.Trip;
+import CityPlanner.Model.*;
 
 import java.io.InputStream;
 import java.io.OutputStream;

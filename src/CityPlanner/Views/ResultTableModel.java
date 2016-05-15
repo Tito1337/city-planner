@@ -6,23 +6,18 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 /**
- * Created by tito on 15/05/16.
+ * Modélise la table des résultats pour selon AbstractTableModel
+ * La dernière colonne est une checkbox éditable.
+ * Documentation des méthodes : voir AbstractTableModel
  */
 public class ResultTableModel extends AbstractTableModel {
-    String[] columnNames = {"Activité",
-            "Description",
-            "Adresse",
-            "Durée",
-            "Prix",
-            "Ouverture",
-            "Accepter"};
+    String[] columnNames = {"Activité", "Description", "Adresse", "Durée", "Prix", "Ouverture", "Accepter"};
     private ArrayList<Activity> activities;
 
     public ResultTableModel(ArrayList<Activity> activities) {
         this.activities = activities;
     }
 
-    @Override
     public int getRowCount() {
         return activities.size();
     }
@@ -39,12 +34,10 @@ public class ResultTableModel extends AbstractTableModel {
         }
     }
 
-    @Override
     public int getColumnCount() {
         return columnNames.length;
     }
 
-    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object value = "??";
         Activity a = activities.get(rowIndex);

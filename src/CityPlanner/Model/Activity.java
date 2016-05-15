@@ -43,11 +43,6 @@ public class Activity {
     }
 
     /**
-     * Constructeur par défaut pour héritage
-     */
-    public Activity() {}
-
-    /**
      * @return identifiant unique de l'activité dans la base de données
      */
     public int getId() {
@@ -82,26 +77,44 @@ public class Activity {
         return tags;
     }
 
+    /**
+     * @return prix de l'activité, en euros
+     */
     public float getPrice() {
         return price;
     }
 
+    /**
+     * @return durée de l'activité, en heures
+     */
     public float getDuration() {
         return duration;
     }
 
+    /**
+     * @return adresse de l'activité
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * @return jours d'ouverture de l'activité
+     */
     public String getOpen() {
         return open;
     }
 
+    /**
+     * @return si l'activité est marquée sélectionnée (vrai par défaut)
+     */
     public Boolean getSelected() {
         return selected;
     }
 
+    /**
+     * @param selected booléen marquant l'activité sélectionnée ou non
+     */
     public void setSelected(Boolean selected) {
         this.selected = selected;
     }

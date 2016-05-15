@@ -31,6 +31,10 @@ public class Tag {
         return name;
     }
 
+    /**
+     * toString explicite pour faciliter l'écriture du sélecteur
+     * @return nom décrivant le tag
+     */
     public String toString() {
         return getName();
     }
