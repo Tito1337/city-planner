@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import com.toedter.calendar.*;
 
 /**
@@ -67,7 +68,7 @@ public class Window extends JFrame {
         DuPanel.add(DuLabel);
 
         // Sélection de la date de début
-        JDateChooser StartDate=new JDateChooser();
+        JDateChooser StartDate=new JDateChooser(new Date());
         DuPanel.add(StartDate);
 
         gbc.gridx = 4;
@@ -82,7 +83,7 @@ public class Window extends JFrame {
         pan.add(AuLabel, gbc);
 
         // Sélection de la date de fin
-        JDateChooser EndDate=new JDateChooser();
+        JDateChooser EndDate=new JDateChooser(new Date());
         gbc.gridx = 6;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
