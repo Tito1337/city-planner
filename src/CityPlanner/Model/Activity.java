@@ -15,6 +15,7 @@ public class Activity {
     private String address;
     private String open;
     private ArrayList<Tag> tags;
+    private Boolean selected;
 
     /**
      * Constructeur
@@ -38,6 +39,7 @@ public class Activity {
         this.address = address;
         this.open = open;
         this.tags = tags;
+        this.selected = new Boolean(true);
     }
 
     /**
@@ -94,5 +96,13 @@ public class Activity {
 
     public String getOpen() {
         return open;
+    }
+
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
     }
 }
