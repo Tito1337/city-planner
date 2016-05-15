@@ -7,10 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import CityPlanner.Model.City;
-import CityPlanner.Model.Database;
-import CityPlanner.Model.Tag;
-import CityPlanner.Model.Trip;
+import CityPlanner.Model.*;
 import com.sun.org.apache.regexp.internal.RE;
 import com.toedter.calendar.*;
 
@@ -169,24 +166,22 @@ public class Window extends JFrame {
         public void actionPerformed(ActionEvent e) {
             try {
                 trip = new Trip((City)cityComboBox.getSelectedItem(), Integer.parseInt((String)personComboBox.getSelectedItem()), (Tag)tagComboBox.getSelectedItem());
-                //responseTextField.setText(trip.toString());
-                String[] columnNames = {"First Name",
-                        "Last Name",
-                        "Sport",
-                        "# of Years",
-                        "Vegetarian"};
+                String[] columnNames = {"Activité",
+                        "Description",
+                        "Adresse",
+                        "Durée",
+                        "Prix",
+                        "Ouverture"};
 
+                ArrayList<Object> data = new ArrayList<Object>();
+                for(Activity a: trip.getActivities()) {
+                    data.add({
+                            a.getName(), a.getDescription()
+                    })
+                }
                 Object[][] data = {
                         {"Mary", "Campione",
-                                "Snowboarding", new Integer(5), new Boolean(false)},
-                        {"Alison", "Huml",
-                                "Rowing", new Integer(3), new Boolean(true)},
-                        {"Kathy", "Walrath",
-                                "Knitting", new Integer(2), new Boolean(false)},
-                        {"Sharon", "Zakhour",
-                                "Speed reading", new Integer(20), new Boolean(true)},
-                        {"Philip", "Milne",
-                                "Pool", new Integer(10), new Boolean(false)}
+                                "Snowboarding", "a", "b", "e", "e"}
                 };
 
                 JTable table = new JTable(data, columnNames);
