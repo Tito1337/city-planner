@@ -12,7 +12,7 @@ public class Main {
             Window Citytrip = new Window();
             new Thread(new Webserver(9888)).start();
         } catch (Exception e) {
-            System.out.printf("ERREUR JAVA : %s\n", e);
+            System.err.printf("ERREUR JAVA : %s\n", e);
             e.printStackTrace();
             System.exit(-1);
         }
