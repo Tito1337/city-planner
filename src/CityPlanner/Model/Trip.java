@@ -14,6 +14,10 @@ public class Trip {
     private Tag tag;
     private ArrayList<Activity> activities;
 
+    public Trip() {
+
+    }
+
     public Trip(City city, int personNumber, Tag tag) throws SQLException {
         this.city = city;
         this.personNumber = personNumber;
@@ -36,5 +40,22 @@ public class Trip {
 
     public ArrayList<Activity> getActivities() {
         return activities;
+    }
+
+    public void setCity(City city) throws SQLException {
+        this.city = city;
+        this.activities = Database.getCityActivities(city);
+    }
+
+    public void setPersonNumber(int personNumber) {
+        this.personNumber = personNumber;
+    }
+
+    public void setTag(Tag tag) {
+        this.tag = tag;
+    }
+
+    public void setActivities(ArrayList<Activity> activities) {
+        this.activities = activities;
     }
 }

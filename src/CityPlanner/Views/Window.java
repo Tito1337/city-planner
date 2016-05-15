@@ -21,7 +21,6 @@ import javax.swing.table.TableColumn;
 /**
  * Created by Benjamin on 11/03/16.
  */
-
 public class Window extends JFrame {
 
     public Window() throws SQLException {
@@ -122,10 +121,11 @@ public class Window extends JFrame {
         gbc.gridwidth = 1;
         pan.add(TagComboBox, gbc);
 
-        JPanel Response = new JPanel();
+        JPanel ResponsePanel = new JPanel();
 
         JButton Search = new JButton("Rechercher");
-        Search.addActionListener(new SearchActionListener(CityComboBox, PersonComboBox, TagComboBox, Response));
+        Trip trip = new Trip();
+        Search.addActionListener(new SearchActionListener(CityComboBox, PersonComboBox, TagComboBox, ResponsePanel, trip));
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 8;
@@ -136,8 +136,8 @@ public class Window extends JFrame {
         gbc.gridwidth = 8;
         /*Font police = new Font("Arial", Font.ITALIC, 10);
         Response.setFont(police);*/
-        Response.setPreferredSize(new Dimension(150, 180));
-        pan.add(Response, gbc);
+        ResponsePanel.setPreferredSize(new Dimension(150, 180));
+        pan.add(ResponsePanel, gbc);
 
         JButton Print = new JButton("Imprimer");
         gbc.gridx = 1;
@@ -157,20 +157,24 @@ public class Window extends JFrame {
         JComboBox personComboBox;
         JComboBox tagComboBox;
         JPanel responsePanel;
-
         Trip trip;
 
-        public SearchActionListener(JComboBox cityComboBox, JComboBox personComboBox, JComboBox tagComboBox, JPanel responsePanel) {
+        public SearchActionListener(JComboBox cityComboBox, JComboBox personComboBox, JComboBox tagComboBox, JPanel responsePanel, Trip trip) {
             this.cityComboBox = cityComboBox;
             this.personComboBox = personComboBox;
             this.tagComboBox = tagComboBox;
             this.responsePanel = responsePanel;
+            this.trip = trip;
         }
 
         public void actionPerformed(ActionEvent e) {
             try {
-                trip = new Trip((City)cityComboBox.getSelectedItem(), Integer.parseInt((String)personComboBox.getSelectedItem()), (Tag)tagComboBox.getSelectedItem());
-                //responseTextField.setText(trip.toString());
+                responsePanel.removeAll();
+                
+                trip.setCity((City) cityComboBox.getSelectedItem());
+                trip.setPersonNumber(Integer.parseInt((String)personComboBox.getSelectedItem()));
+                trip.setTag((Tag)tagComboBox.getSelectedItem());
+
                 JTable table = new JTable(new ResultTableModel(trip.getActivities()));
                 TableColumn column = null;
                 for (int i = 0; i < 5; i++) {
@@ -190,6 +194,18 @@ public class Window extends JFrame {
             } catch(SQLException exception) {
                 //responseTextField.setText("ERREUR SQL");
             }
+
+        }
+    }
+
+    private class PrintActionListener implements ActionListener {
+        JPanel responsePanel;
+
+        public PrintActionListener(JPanel responsePanel) {
+            this.responsePanel = responsePanel;
+        }
+
+        public void actionPerformed(ActionEvent e) {
 
         }
     }
