@@ -9,6 +9,7 @@ import java.util.Calendar;
 
 import CityPlanner.Model.City;
 import CityPlanner.Model.Database;
+import CityPlanner.Model.Tag;
 import com.sun.org.apache.regexp.internal.RE;
 import com.toedter.calendar.*;
 
@@ -54,7 +55,6 @@ public class Window extends JFrame {
         pan.add(CityLabel, gbc);
 
         //Positionnement du sélecteur de choix de la ville
-        String[] cityItems = {"Bruxelles", "Paris"};
         ArrayList<City> cities = Database.getAllCities();
         JComboBox CityComboBox = new JComboBox(cities.toArray());
         gbc.gridx = 1;
@@ -113,12 +113,12 @@ public class Window extends JFrame {
         pan.add(TypeLabel, gbc);
 
 
-        String[] Type = {"Familial", "Couple", "Adulte", "Divertissement", "Sport"};
-        JComboBox TypeComboBox = new JComboBox(Type);
+        ArrayList<Tag> tags = Database.getAllTags();
+        JComboBox TagComboBox = new JComboBox(tags.toArray());
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
-        pan.add(TypeComboBox, gbc);
+        pan.add(TagComboBox, gbc);
 
         JButton Search = new JButton("Rechercher");
         Search.addActionListener(new SearchActionListener());
