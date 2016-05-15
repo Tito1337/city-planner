@@ -9,6 +9,8 @@ import java.util.Calendar;
 
 import CityPlanner.Model.City;
 import CityPlanner.Model.Database;
+import CityPlanner.Model.Tag;
+import CityPlanner.Model.Trip;
 import com.sun.org.apache.regexp.internal.RE;
 import com.toedter.calendar.*;
 
@@ -106,28 +108,29 @@ public class Window extends JFrame {
         pan.add(PersonComboBox, gbc);
 
 
-        JLabel TypeLabel = new JLabel("Séjour :");
+        JLabel TagLabel = new JLabel("Séjour :");
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
-        pan.add(TypeLabel, gbc);
+        pan.add(TagLabel, gbc);
 
 
-        String[] Type = {"Familial", "Couple", "Adulte", "Divertissement", "Sport"};
-        JComboBox TypeComboBox = new JComboBox(Type);
+        String[] Tag = {"Familial", "Couple", "Adulte", "Divertissement", "Sport"};
+        JComboBox TagComboBox = new JComboBox(Tag);
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
-        pan.add(TypeComboBox, gbc);
+        pan.add(TagComboBox, gbc);
+
+        JTextField Response = new JTextField("Votre programme de city trip ici...");
 
         JButton Search = new JButton("Rechercher");
-        Search.addActionListener(new SearchActionListener());
+        Search.addActionListener(new SearchActionListener(CityComboBox, PersonComboBox, TagComboBox, Response));
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 8;
         pan.add(Search, gbc);
 
-        JTextField Response = new JTextField("Votre programme de city trip ici...");
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 8;
@@ -143,24 +146,6 @@ public class Window extends JFrame {
         gbc.insets = new Insets(10,1,1,1);
         pan.add(Print, gbc);
 
-
-
-        /*
-        String[] cityItems = {"Bruxelles", "Paris"};
-        JComboBox CityComboBox = new JComboBox(cityItems);
-        JDateChooser StartDate=new JDateChooser();
-        JDateChooser EndDate=new JDateChooser();
-
-        this.setLayout(new GridLayout(1, 1));
-        this.getContentPane().add(new JLabel("City : "));
-        this.getContentPane().add(CityComboBox);
-        this.getContentPane().add(new JLabel("Du: "));
-        this.getContentPane().add(StartDate);
-        this.getContentPane().add(new JLabel("Au: "));
-        this.getContentPane().add(EndDate);
-        */
-
-
         //On prévient notre JFrame que notre JPanel sera son content pane
         this.add(pan, BorderLayout.NORTH);
 
@@ -168,8 +153,27 @@ public class Window extends JFrame {
     }
 
     private class SearchActionListener implements ActionListener {
+        JComboBox cityComboBox;
+        JComboBox personComboBox;
+        JComboBox tagComboBox;
+        JTextField responseTextField;
+
+        Trip trip;
+
+        public SearchActionListener(JComboBox cityComboBox, JComboBox personComboBox, JComboBox tagComboBox, JTextField responseTextField) {
+            this.cityComboBox = cityComboBox;
+            this.personComboBox = personComboBox;
+            this.tagComboBox = tagComboBox;
+            this.responseTextField = responseTextField;
+        }
         public void actionPerformed(ActionEvent e) {
-            System.out.println("TROP COOL MON GARS");
+            try {
+                trip = new Trip((City)cityComboBox.getSelectedItem(), Integer.parseInt((String)personComboBox.getSelectedItem()), (Tag)tagComboBox.getSelectedItem());
+                responseTextField.setText(trip.toString());
+            } catch(SQLException exception) {
+                responseTextField.setText("ERREUR SQL");
+            }
+
         }
     }
 
