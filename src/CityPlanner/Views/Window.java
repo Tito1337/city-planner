@@ -4,19 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-
 import CityPlanner.Model.City;
 import CityPlanner.Model.Database;
 import CityPlanner.Model.Tag;
 import CityPlanner.Model.Trip;
-import com.sun.org.apache.regexp.internal.RE;
 import com.toedter.calendar.*;
-
-import java.awt.Color;
-import javax.swing.*;
-import javax.swing.table.TableColumn;
 
 /**
  * Created by Benjamin on 11/03/16.
@@ -127,7 +122,7 @@ public class Window extends JFrame {
         JPanel ResponsePanel = new JPanel();
 
         JButton Search = new JButton("Rechercher");
-        Search.addActionListener(new SearchActionListener(CityComboBox, PersonComboBox, TagComboBox, ResponsePanel, trip));
+        Search.addActionListener(new SearchActionListener(CityComboBox, PersonComboBox, TagComboBox, ResponsePanel, trip, StartDate, EndDate));
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 8;
@@ -159,13 +154,17 @@ public class Window extends JFrame {
         JComboBox personComboBox;
         JComboBox tagComboBox;
         JPanel responsePanel;
+        JDateChooser startDateChooser;
+        JDateChooser endDateChooser;
         Trip trip;
 
-        public SearchActionListener(JComboBox cityComboBox, JComboBox personComboBox, JComboBox tagComboBox, JPanel responsePanel, Trip trip) {
+        public SearchActionListener(JComboBox cityComboBox, JComboBox personComboBox, JComboBox tagComboBox, JPanel responsePanel, Trip trip, JDateChooser startDateChooser, JDateChooser endDateChooser) {
             this.cityComboBox = cityComboBox;
             this.personComboBox = personComboBox;
             this.tagComboBox = tagComboBox;
             this.responsePanel = responsePanel;
+            this.startDateChooser = startDateChooser;
+            this.endDateChooser = endDateChooser;
             this.trip = trip;
         }
 
@@ -173,10 +172,16 @@ public class Window extends JFrame {
             try {
                 responsePanel.removeAll();
 
+                // Mettre à jour l'instance de Trip avec les informations du formulaire
+                // Trip recalcule automatiquement toutes les activitiés disponibles.
                 trip.setCity((City) cityComboBox.getSelectedItem());
                 trip.setPersonNumber(Integer.parseInt((String)personComboBox.getSelectedItem()));
                 trip.setTag((Tag)tagComboBox.getSelectedItem());
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                trip.setStartDate(df.format(startDateChooser.getDate()));
+                trip.setEndDate(df.format(startDateChooser.getDate()));
 
+                // Largeur par défaut des colonnes
                 JTable table = new JTable(new ResultTableModel(trip.getActivities()));
                 table.getColumnModel().getColumn(0).setPreferredWidth(150);
                 table.getColumnModel().getColumn(1).setPreferredWidth(350);

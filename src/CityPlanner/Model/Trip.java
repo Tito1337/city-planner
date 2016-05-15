@@ -13,6 +13,8 @@ public class Trip {
     private int personNumber;
     private Tag tag = null;
     private ArrayList<Activity> activities;
+    private String startDate;
+    private String endDate;
 
     public Trip() {
 
@@ -62,5 +64,21 @@ public class Trip {
 
     public void setActivities(ArrayList<Activity> activities) {
         this.activities = activities;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }
